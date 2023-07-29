@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<robot name="micro_servo" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!-- Physical Material Macros -->
+  <material name="Red">
+    <color rgba="1.0 0 0 1.0" />
+  </material>
+  <material name="Green">
+    <color rgba="0 1.0 0 1.0" />
+  </material>
+  <material name="Blue">
+    <color rgba="0 0 1.0 1" />
+  </material>
+  <material name="Black">
+    <color rgba="0 0 0 1.0" />
+  </material>
+
+  <xacro:property name="servo_length" value="0.022" />
+  <xacro:property name="servo_width" value="0.011" />
+  <xacro:property name="servo_heigth" value="0.021" />
+  <xacro:property name="support_radius" value="${servo_width/2}" />
+  <xacro:property name="support_heigth" value="0.005" />
+  <xacro:property name="rot_link_length" value="0.032" />
+  <xacro:property name="rot_link_width" value="0.005" />
+  <xacro:property name="rot_link_heigth" value="0.004" />
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="${servo_length} ${servo_width} ${servo_heigth}" />
+      </geometry>
+      <origin xyz="0 0 ${servo_heigth/2}" rpy="0 0 0" />
+      <material name="Blue" />
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${servo_length} ${servo_width} ${servo_heigth}" />
+      </geometry>
+      <origin xyz="0 0 ${servo_heigth/2}" rpy="0 0 0" />
+      <material name="Blue" />
+    </collision>
+  </link>
+
+  <link name="support_link">
+    <visual>
+      <origin xyz="0 0 ${support_heigth/2}" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="${support_radius}" length="${support_heigth}" />
+      </geometry>
+      <material name="Blue" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 ${support_heigth/2}" rpy="0 0 0" />
+      <geometry>
+        <cylinder radius="${support_radius}" length="${support_heigth}" />
+      </geometry>
+      <material name="Blue" />
+    </collision>
+  </link>
+  <joint name="base_to_support" type="fixed">
+    <parent link="base_link" />
+    <child link="support_link" />
+    <origin xyz="0.005 0 ${servo_heigth}" rpy="0 0 0" />
+  </joint>
+
+  <link name="rot_link">
+    <visual>
+      <origin xyz="0 0 ${rot_link_heigth/2}" rpy="0 0 0" />
+      <geometry>
+        <box size="${rot_link_length} ${rot_link_width} ${rot_link_heigth}" />
+      </geometry>
+      <material name="Red" />
+    </visual>
+    <collision>
+      <origin xyz="0 0 ${rot_link_heigth/2}" rpy="0 0 0" />
+      <geometry>
+        <box size="${rot_link_length} ${rot_link_width} ${rot_link_heigth}" />
+      </geometry>
+      <material name="Red" />
+    </collision>
+  </link>
+  <joint name="support_to_rot_link" type="continuous">
+    <parent link="support_link" />
+    <child link="rot_link" />
+    <axis xyz="0 0 1"/>
+    <origin xyz="0 0 ${rot_link_heigth}" rpy="0 0 0" />
+  </joint>
+
+</robot>
