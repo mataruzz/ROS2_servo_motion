@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!-- S90 - servo motor -->
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="S90_servo">
+  <xacro:arg name="prefix" default="" />
+
+  <!-- Import micro_servo S90 macro -->
+  <xacro:include filename="$(find description)/urdf/servo.urdf.xacro" />
+
+  <!-- Import RRBot ros2_control description -->
+  <xacro:include filename="$(find description)/urdf/servo.ros2_control.xacro" />
+
+  <!-- Used for fixing robot -->
+  <link name="world"/>
+
+  <xacro:micro_servo parent="world" prefix="$(arg prefix)">
+    <origin xyz="0 0 0" rpy="0 0 0" />
+  </xacro:micro_servo>
+
+  <xacro:S90_servo_ros2_control
+    name="S90_servo_control"/>
+
+</robot>

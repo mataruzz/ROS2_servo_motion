@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
-<robot name="micro_servo" xmlns:xacro="http://ros.org/wiki/xacro">
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:macro name="micro_servo" params="parent prefix *origin">
 
   <!-- Physical Material Macros -->
   <material name="Red">
@@ -24,6 +26,13 @@
   <xacro:property name="rot_link_width" value="0.005" />
   <xacro:property name="rot_link_heigth" value="0.004" />
 
+  <joint name="${prefix}base_joint" type="fixed">
+    <xacro:insert_block name="origin" />
+    <parent link="${parent}"/>
+    <child link="${prefix}base_link" />
+  </joint>
+
+  <!-- Base Link -->
   <link name="base_link">
     <visual>
       <geometry>
@@ -85,5 +94,7 @@
     <axis xyz="0 0 1"/>
     <origin xyz="0 0 ${rot_link_heigth}" rpy="0 0 0" />
   </joint>
+
+</xacro:macro>
 
 </robot>

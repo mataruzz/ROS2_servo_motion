@@ -12,8 +12,8 @@ from launch_ros.parameter_descriptions import ParameterValue
 def generate_launch_description():
     # Default paths
     servo_description_path = get_package_share_path('description')
-    default_model_path = servo_description_path / 'urdf/servo.urdf.xacro'
-    default_rviz_config_path = servo_description_path / 'configs/config.rviz'
+    default_model_path = servo_description_path / 'urdf/servo.xacro'
+    default_rviz_config_path = servo_description_path / 'config/config.rviz'
 
 
 

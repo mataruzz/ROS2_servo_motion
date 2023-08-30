@@ -1,0 +1,10 @@
+<library path="hardware">
+    <class name="hardware/S90ServoSystemPositionOnlyHardware"
+           type="hardware::S90ServoSystemPositionOnlyHardware"
+           base_class_type="hardware_interface::SystemInterface">
+      <description>
+        The ros2_control S90_servo example using a system hardware interface-type.
+      </description>
+    </class>
+</library>
+  
