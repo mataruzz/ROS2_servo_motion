@@ -18,13 +18,13 @@ def generate_launch_description():
 
 
     # Default ros arguments
-    gui_arg = DeclareLaunchArgument(name='gui', default_value='true', choices=['true', 'false'],
+    gui_arg = DeclareLaunchArgument(name='gui', default_value='false', choices=['true', 'false'],
                                         description='Flag to enable joint_state_publisher_gui')
     model_arg = DeclareLaunchArgument(name='model', default_value=str(default_model_path),
                                         description='Absolute path to robot urdf file')
     rviz_arg = DeclareLaunchArgument(name='rvizconfig', default_value=str(default_rviz_config_path),
                                         description='Absolute path to rviz config file')
-    rviz_on = DeclareLaunchArgument(name='rviz_on', default_value='true', choices=['true', 'false'],
+    use_rviz = DeclareLaunchArgument(name='use_rviz', default_value='false', choices=['true', 'false'],
                                         description='Flag to launch rviz')
     
     
@@ -60,14 +60,14 @@ def generate_launch_description():
         name='rviz2',
         output='log',
         arguments=['-d', LaunchConfiguration('rvizconfig')],
-        condition=IfCondition(LaunchConfiguration('rviz_on'))
+        condition=IfCondition(LaunchConfiguration('use_rviz'))
     )
 
     return LaunchDescription([
         gui_arg,
         model_arg,
         rviz_arg,
-        rviz_on,
+        use_rviz,
         robot_state_publisher_node,
         joint_state_publisher_node,
         joint_state_publisher_gui_node,
