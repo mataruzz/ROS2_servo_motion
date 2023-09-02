@@ -30,6 +30,9 @@ target_include_directories(hardware PUBLIC
 $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/hardware/include>
 $<INSTALL_INTERFACE:include/hardware>
 )
+
+target_link_libraries(hardware PUBLIC wiringPi)
+
 ament_target_dependencies(
   hardware PUBLIC
   ${THIS_PACKAGE_INCLUDE_DEPENDS}

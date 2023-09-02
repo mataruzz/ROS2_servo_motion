@@ -8,7 +8,7 @@
                 <plugin>hardware/S90ServoSystemPositionOnlyHardware</plugin>
                 <param name="example_param_hw_start_duration_sec">0</param>
                 <param name="example_param_hw_stop_duration_sec">3.0</param>
-                <param name="example_param_hw_slowdown">100</param>
+                <param name="example_param_hw_slowdown">5</param>
             </hardware>
 
             <joint name="support_to_rot_link">

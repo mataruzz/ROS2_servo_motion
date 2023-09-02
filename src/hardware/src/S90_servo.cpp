@@ -1,4 +1,5 @@
 #include "../include/hardware/S90_servo.hpp"
+#include "../include/hardware/S90_GPIOs_functions.hpp"
 
 #include <chrono>
 #include <cmath>
@@ -8,6 +9,11 @@
 
 #include "hardware_interface/types/hardware_interface_type_values.hpp"
 #include "rclcpp/rclcpp.hpp"
+
+#include "wiringPi.h"
+#include <unistd.h>
+#include <cstdio>
+#define GPIO_PIN 5
 
 namespace hardware
 {
@@ -177,17 +183,19 @@ hardware_interface::return_type S90ServoSystemPositionOnlyHardware::read(
   const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
 {
     // BEGIN: This part here is for exemplary purposes - Please do not copy to your production code
-    RCLCPP_INFO(rclcpp::get_logger("S90ServoSystemPositionOnlyHardware"), "Reading...");
+    // RCLCPP_INFO(rclcpp::get_logger("S90ServoSystemPositionOnlyHardware"), "Reading...");
 
     for (uint i = 0; i < hw_states_.size(); i++)
     {
-        // Simulate S90 servo's movement
+    //     // Simulate S90 servo's movement
         hw_states_[i] = hw_states_[i] + (hw_commands_[i] - hw_states_[i]) / hw_slowdown_;
-        RCLCPP_INFO(
-        rclcpp::get_logger("S90ServoSystemPositionOnlyHardware"), "Got state %.5f for joint %d!",
-        hw_states_[i], i);
+
+        // hw_states_[i] = hw_states_[i] + (hw_commands_[i] - hw_states_[i]);
+    //     RCLCPP_INFO(
+    //     rclcpp::get_logger("S90ServoSystemPositionOnlyHardware"), "Got state %.5f for joint %d!",
+    //     hw_states_[i], i);
     }
-    RCLCPP_INFO(rclcpp::get_logger("S90ServoSystemPositionOnlyHardware"), "Joints successfully read!");
+    // RCLCPP_INFO(rclcpp::get_logger("S90ServoSystemPositionOnlyHardware"), "Joints successfully read!");
     // END: This part here is for exemplary purposes - Please do not copy to your production code
 
     return hardware_interface::return_type::OK;
@@ -197,19 +205,47 @@ hardware_interface::return_type S90ServoSystemPositionOnlyHardware::write(
   const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
 {
     // BEGIN: This part here is for exemplary purposes - Please do not copy to your production code
-    RCLCPP_INFO(rclcpp::get_logger("S90ServoSystemPositionOnlyHardware"), "Writing...");
+    // RCLCPP_INFO(rclcpp::get_logger("S90ServoSystemPositionOnlyHardware"), "Writing...");
+    
+    wiringPiSetupGpio();
+    // Set the pin as an output
+    pinMode(GPIO_PIN, OUTPUT);
+
+    // TEST moving to 0
+    // digitalWrite(GPIO_PIN, HIGH);
+    // usleep(300);
+
+    // // Set the pin low for the remaining cycle
+    // digitalWrite(GPIO_PIN, LOW);
+    // usleep(20'000);
+    // END TEST
 
     for (uint i = 0; i < hw_commands_.size(); i++)
     {
-        // Simulate sending commands to the hardware
-        RCLCPP_INFO(
-        rclcpp::get_logger("S90ServoSystemPositionOnlyHardware"), "Got command %.5f for joint %d!",
-        hw_commands_[i], i);
-    }
-    RCLCPP_INFO(
-        rclcpp::get_logger("S90ServoSystemPositionOnlyHardware"), "Joints successfully written!");
+    //     // Simulate sending commands to the hardware
+    //     RCLCPP_INFO(
+    //     rclcpp::get_logger("S90ServoSystemPositionOnlyHardware"), "Got command %.5f for joint %d!",
+    //     hw_commands_[i], i);
+    // }
+    // RCLCPP_INFO(
+    //     rclcpp::get_logger("S90ServoSystemPositionOnlyHardware"), "Joints successfully written!");
     // END: This part here is for exemplary purposes - Please do not copy to your production code
+            const double angleRad = hw_commands_[i];
+            const auto delayOn = 15'000;
 
+            double angleDeg = angleRad*180/(3.1415926);
+            double pwmOn = angleDeg*13 + 300;
+            // Set the pin high for pwmOn 
+            digitalWrite(GPIO_PIN, HIGH);
+            usleep(pwmOn);
+
+            // Set the pin low for the remaining cycle
+            digitalWrite(GPIO_PIN, LOW);
+            usleep(20.0*1000 - pwmOn);
+            // usleep(delayOn);
+    }
+
+    
     return hardware_interface::return_type::OK;
 }
 

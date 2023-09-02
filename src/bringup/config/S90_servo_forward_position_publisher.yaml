@@ -1,11 +1,383 @@
 publisher_forward_position_controller:
   ros__parameters:
 
-    wait_sec_between_publish: 5
+    wait_sec_between_publish: 1
     publish_topic: "/forward_position_controller/commands"
 
-    goal_names: ["pos1", "pos2", "pos3", "pos4"]
-    pos1: [0.785]
-    pos2: [0]
-    pos3: [-0.785]
-    pos4: [0]
+    goal_names: ["pos1", "pos2", "pos3", "pos4", "pos5", "pos6", "pos7", "pos8", "pos9"]
+    pos1: [0]
+    pos2: [0.785]
+    pos3: [1.57]
+    pos4: [2.36]
+    pos5: [2.8]
+    pos6: [2.36]
+    pos7: [1.57]
+    pos8: [0.785]
+    pos9: [0]
+    
+    # goal_names:
+    #   - "pos1"
+    #   - "pos2"
+    #   - "pos3"
+    #   - "pos4"
+    #   - "pos5"
+    #   - "pos6"
+    #   - "pos7"
+    #   - "pos8"
+    #   - "pos9"
+    #   - "pos10"
+    #   - "pos11"
+    #   - "pos12"
+    #   - "pos13"
+    #   - "pos14"
+    #   - "pos15"
+    #   - "pos16"
+    #   - "pos17"
+    #   - "pos18"
+    #   - "pos19"
+    #   - "pos20"
+    #   - "pos21"
+    #   - "pos22"
+    #   - "pos23"
+    #   - "pos24"
+    #   - "pos25"
+    #   - "pos26"
+    #   - "pos27"
+    #   - "pos28"
+    #   - "pos29"
+    #   - "pos30"
+    #   - "pos31"
+    #   - "pos32"
+    #   - "pos33"
+    #   - "pos34"
+    #   - "pos35"
+    #   - "pos36"
+    #   - "pos37"
+    #   - "pos38"
+    #   - "pos39"
+    #   - "pos40"
+    #   - "pos41"
+    #   - "pos42"
+    #   - "pos43"
+    #   - "pos44"
+    #   - "pos45"
+    #   - "pos46"
+    #   - "pos47"
+    #   - "pos48"
+    #   - "pos49"
+    #   - "pos50"
+    #   - "pos51"
+    #   - "pos52"
+    #   - "pos53"
+    #   - "pos54"
+    #   - "pos55"
+    #   - "pos56"
+    #   - "pos57"
+    #   - "pos58"
+    #   - "pos59"
+    #   - "pos60"
+    #   - "pos61"
+    #   - "pos62"
+    #   - "pos63"
+    #   - "pos64"
+    #   - "pos65"
+    #   - "pos66"
+    #   - "pos67"
+    #   - "pos68"
+    #   - "pos69"
+    #   - "pos70"
+    #   - "pos71"
+    #   - "pos72"
+    #   - "pos73"
+    #   - "pos74"
+    #   - "pos75"
+    #   - "pos76"
+    #   - "pos77"
+    #   - "pos78"
+    #   - "pos79"
+    #   - "pos80"
+    #   - "pos81"
+    #   - "pos82"
+    #   - "pos83"
+    #   - "pos84"
+    #   - "pos85"
+    #   - "pos86"
+    #   - "pos87"
+    #   - "pos88"
+    #   - "pos89"
+    #   - "pos90"
+    #   - "pos91"
+    #   - "pos92"
+    #   - "pos93"
+    #   - "pos94"
+    #   - "pos95"
+    #   - "pos96"
+    #   - "pos97"
+    #   - "pos98"
+    #   - "pos99"
+    #   - "pos100"
+    #   - "pos101"
+    #   - "pos102"
+    #   - "pos103"
+    #   - "pos104"
+    #   - "pos105"
+    #   - "pos106"
+    #   - "pos107"
+    #   - "pos108"
+    #   - "pos109"
+    #   - "pos110"
+    #   - "pos111"
+    #   - "pos112"
+    #   - "pos113"
+    #   - "pos114"
+    #   - "pos115"
+    #   - "pos116"
+    #   - "pos117"
+    #   - "pos118"
+    #   - "pos119"
+    #   - "pos120"
+    #   - "pos121"
+    #   - "pos122"
+    #   - "pos123"
+    #   - "pos124"
+    #   - "pos125"
+    #   - "pos126"
+    #   - "pos127"
+    #   - "pos128"
+    #   - "pos129"
+    #   - "pos130"
+    #   - "pos131"
+    #   - "pos132"
+    #   - "pos133"
+    #   - "pos134"
+    #   - "pos135"
+    #   - "pos136"
+    #   - "pos137"
+    #   - "pos138"
+    #   - "pos139"
+    #   - "pos140"
+    #   - "pos141"
+    #   - "pos142"
+    #   - "pos143"
+    #   - "pos144"
+    #   - "pos145"
+    #   - "pos146"
+    #   - "pos147"
+    #   - "pos148"
+    #   - "pos149"
+    #   - "pos150"
+    #   - "pos151"
+    #   - "pos152"
+    #   - "pos153"
+    #   - "pos154"
+    #   - "pos155"
+    #   - "pos156"
+    #   - "pos157"
+    #   - "pos158"
+    #   - "pos159"
+    #   - "pos160"
+    #   - "pos161"
+    #   - "pos162"
+    #   - "pos163"
+    #   - "pos164"
+    #   - "pos165"
+    #   - "pos166"
+    #   - "pos167"
+    #   - "pos168"
+    #   - "pos169"
+    #   - "pos170"
+    #   - "pos171"
+    #   - "pos172"
+    #   - "pos173"
+    #   - "pos174"
+    #   - "pos175"
+    #   - "pos176"
+    #   - "pos177"
+    #   - "pos178"
+    #   - "pos179"
+    #   - "pos180"
+
+    # # Explicitly specify position values in radians
+    # pos1: [0]
+    # pos2: [0.0174533]   # 1 degree in radians
+    # pos3: [0.0349066]   # 2 degrees in radians
+    # pos4: [0.0523599]   # 3 degrees in radians
+    # pos5: [0.0698132]   # 4 degrees in radians
+    # pos6: [0.0872665]   # 5 degrees in radians
+    # pos7: [0.1047200]   # 6 degrees in radians
+    # pos8: [0.1221730]   # 7 degrees in radians
+    # pos9: [0.1396263]   # 8 degrees in radians
+    # pos10: [0.1570796]  # 9 degrees in radians
+    # pos11: [0.1745329]  # 10 degrees in radians
+    # pos12: [0.1919862]  # 11 degrees in radians
+    # pos13: [0.2094395]  # 12 degrees in radians
+    # pos14: [0.2268928]  # 13 degrees in radians
+    # pos15: [0.2443461]  # 14 degrees in radians
+    # pos16: [0.2617994]  # 15 degrees in radians
+    # pos17: [0.2792527]  # 16 degrees in radians
+    # pos18: [0.2967060]  # 17 degrees in radians
+    # pos19: [0.3141593]  # 18 degrees in radians
+    # pos20: [0.3316126]  # 19 degrees in radians
+    # pos21: [0.3490659]  # 20 degrees in radians
+    # pos22: [0.3665191]  # 21 degrees in radians
+    # pos23: [0.3839724]  # 22 degrees in radians
+    # pos24: [0.4014257]  # 23 degrees in radians
+    # pos25: [0.4188790]  # 24 degrees in radians
+    # pos26: [0.4363323]  # 25 degrees in radians
+    # pos27: [0.4537856]  # 26 degrees in radians
+    # pos28: [0.4712389]  # 27 degrees in radians
+    # pos29: [0.4886922]  # 28 degrees in radians
+    # pos30: [0.5061455]  # 29 degrees in radians
+    # pos31: [0.5235988]  # 30 degrees in radians
+    # pos32: [0.5410521]  # 31 degrees in radians
+    # pos33: [0.5585054]  # 32 degrees in radians
+    # pos34: [0.5759587]  # 33 degrees in radians
+    # pos35: [0.5934120]  # 34 degrees in radians
+    # pos36: [0.6108653]  # 35 degrees in radians
+    # pos37: [0.6283186]  # 36 degrees in radians
+    # pos38: [0.6457719]  # 37 degrees in radians
+    # pos39: [0.6632252]  # 38 degrees in radians
+    # pos40: [0.6806785]  # 39 degrees in radians
+    # pos41: [0.6981318]  # 40 degrees in radians
+    # pos42: [0.7155851]  # 41 degrees in radians
+    # pos43: [0.7330384]  # 42 degrees in radians
+    # pos44: [0.7504917]  # 43 degrees in radians
+    # pos45: [0.7679450]  # 44 degrees in radians
+    # pos46: [0.7853982]  # 45 degrees in radians
+    # # ... Continued from pos46 to pos180
+    # pos47: [0.8028515]  # 46 degrees in radians
+    # pos48: [0.8203048]  # 47 degrees in radians
+    # pos49: [0.8377581]  # 48 degrees in radians
+    # pos50: [0.8552114]  # 49 degrees in radians
+    # pos51: [0.8726647]  # 50 degrees in radians
+    # pos52: [0.8901180]  # 51 degrees in radians
+    # pos53: [0.9075713]  # 52 degrees in radians
+    # pos54: [0.9250246]  # 53 degrees in radians
+    # pos55: [0.9424779]  # 54 degrees in radians
+    # pos56: [0.9599312]  # 55 degrees in radians
+    # pos57: [0.9773845]  # 56 degrees in radians
+    # pos58: [0.9948378]  # 57 degrees in radians
+    # pos59: [1.0122911]  # 58 degrees in radians
+    # pos60: [1.0297444]  # 59 degrees in radians
+    # pos61: [1.0471977]  # 60 degrees in radians
+    # pos62: [1.0646510]  # 61 degrees in radians
+    # pos63: [1.0821043]  # 62 degrees in radians
+    # pos64: [1.0995576]  # 63 degrees in radians
+    # pos65: [1.1170109]  # 64 degrees in radians
+    # pos66: [1.1344642]  # 65 degrees in radians
+    # pos67: [1.1519175]  # 66 degrees in radians
+    # pos68: [1.1693708]  # 67 degrees in radians
+    # pos69: [1.1868241]  # 68 degrees in radians
+    # pos70: [1.2042774]  # 69 degrees in radians
+    # pos71: [1.2217307]  # 70 degrees in radians
+    # pos72: [1.2391840]  # 71 degrees in radians
+    # pos73: [1.2566371]  # 72 degrees in radians
+    # pos74: [1.2740904]  # 73 degrees in radians
+    # pos75: [1.2915437]  # 74 degrees in radians
+    # pos76: [1.3089970]  # 75 degrees in radians
+    # pos77: [1.3264503]  # 76 degrees in radians
+    # pos78: [1.3439036]  # 77 degrees in radians
+    # pos79: [1.3613569]  # 78 degrees in radians
+    # pos80: [1.3788102]  # 79 degrees in radians
+    # pos81: [1.3962635]  # 80 degrees in radians
+    # pos82: [1.4137168]  # 81 degrees in radians
+    # pos83: [1.4311701]  # 82 degrees in radians
+    # pos84: [1.4486234]  # 83 degrees in radians
+    # pos85: [1.4660767]  # 84 degrees in radians
+    # pos86: [1.4835300]  # 85 degrees in radians
+    # pos87: [1.5009833]  # 86 degrees in radians
+    # pos88: [1.5184366]  # 87 degrees in radians
+    # pos89: [1.5358899]  # 88 degrees in radians
+    # pos90: [1.5533432]  # 89 degrees in radians
+    # pos91: [1.5707965]  # 90 degrees in radians
+    # pos92: [1.5882498]  # 91 degrees in radians
+    # pos93: [1.6057031]  # 92 degrees in radians
+    # pos94: [1.6231564]  # 93 degrees in radians
+    # pos95: [1.6406097]  # 94 degrees in radians
+    # pos96: [1.6580630]  # 95 degrees in radians
+    # pos97: [1.6755163]  # 96 degrees in radians
+    # pos98: [1.6929696]  # 97 degrees in radians
+    # pos99: [1.7104229]  # 98 degrees in radians
+    # pos100: [1.7278762]  # 99 degrees in radians
+    # pos101: [1.7453295]  # 100 degrees in radians
+    # pos102: [1.7627828]  # 101 degrees in radians
+    # pos103: [1.7802361]  # 102 degrees in radians
+    # pos104: [1.7976894]  # 103 degrees in radians
+    # pos105: [1.8151427]  # 104 degrees in radians
+    # pos106: [1.8325960]  # 105 degrees in radians
+    # pos107: [1.8500493]  # 106 degrees in radians
+    # pos108: [1.8675026]  # 107 degrees in radians
+    # pos109: [1.8849559]  # 108 degrees in radians
+    # pos110: [1.9024092]  # 109 degrees in radians
+    # pos111: [1.9198625]  # 110 degrees in radians
+    # pos112: [1.9373158]  # 111 degrees in radians
+    # pos113: [1.9547691]  # 112 degrees in radians
+    # pos114: [1.9722224]  # 113 degrees in radians
+    # pos115: [1.9896757]  # 114 degrees in radians
+    # pos116: [2.0071290]  # 115 degrees in radians
+    # pos117: [2.0245823]  # 116 degrees in radians
+    # pos118: [2.0420356]  # 117 degrees in radians
+    # pos119: [2.0594889]  # 118 degrees in radians
+    # pos120: [2.0769422]  # 119 degrees in radians
+    # pos121: [2.0943955]  # 120 degrees in radians
+    # pos122: [2.1118488]  # 121 degrees in radians
+    # pos123: [2.1293021]  # 122 degrees in radians
+    # pos124: [2.1467554]  # 123 degrees in radians
+    # pos125: [2.1642087]  # 124 degrees in radians
+    # pos126: [2.1816620]  # 125 degrees in radians
+    # pos127: [2.1991153]  # 126 degrees in radians
+    # pos128: [2.2165686]  # 127 degrees in radians
+    # pos129: [2.2340219]  # 128 degrees in radians
+    # pos130: [2.2514752]  # 129 degrees in radians
+    # pos131: [2.2689285]  # 130 degrees in radians
+    # pos132: [2.2863818]  # 131 degrees in radians
+    # pos133: [2.3038351]  # 132 degrees in radians
+    # pos134: [2.3212884]  # 133 degrees in radians
+    # pos135: [2.3387417]  # 134 degrees in radians
+    # pos136: [2.3561950]  # 135 degrees in radians
+    # pos137: [2.3736483]  # 136 degrees in radians
+    # pos138: [2.3911016]  # 137 degrees in radians
+    # pos139: [2.4085549]  # 138 degrees in radians
+    # pos140: [2.4260082]  # 139 degrees in radians
+    # pos141: [2.4434615]  # 140 degrees in radians
+    # pos142: [2.4609148]  # 141 degrees in radians
+    # pos143: [2.4783681]  # 142 degrees in radians
+    # pos144: [2.4958214]  # 143 degrees in radians
+    # pos145: [2.5132747]  # 144 degrees in radians
+    # pos146: [2.5307280]  # 145 degrees in radians
+    # pos147: [2.5481813]  # 146 degrees in radians
+    # pos148: [2.5656346]  # 147 degrees in radians
+    # pos149: [2.5830879]  # 148 degrees in radians
+    # pos150: [2.6005412]  # 149 degrees in radians
+    # pos151: [2.6179945]  # 150 degrees in radians
+    # pos152: [2.6354478]  # 151 degrees in radians
+    # pos153: [2.6529011]  # 152 degrees in radians
+    # pos154: [2.6703544]  # 153 degrees in radians
+    # pos155: [2.6878077]  # 154 degrees in radians
+    # pos156: [2.7052610]  # 155 degrees in radians
+    # pos157: [2.7227143]  # 156 degrees in radians
+    # pos158: [2.7401676]  # 157 degrees in radians
+    # pos159: [2.7576210]  # 158 degrees in radians
+    # pos160: [2.7750743]  # 159 degrees in radians
+    # pos161: [2.7925276]  # 160 degrees in radians
+    # pos162: [2.8099809]  # 161 degrees in radians
+    # pos163: [2.8274342]  # 162 degrees in radians
+    # pos164: [2.8448875]  # 163 degrees in radians
+    # pos165: [2.8623408]  # 164 degrees in radians
+    # pos166: [2.8797941]  # 165 degrees in radians
+    # pos167: [2.8972474]  # 166 degrees in radians
+    # pos168: [2.9147007]  # 167 degrees in radians
+    # pos169: [2.9321540]  # 168 degrees in radians
+    # pos170: [2.9496073]  # 169 degrees in radians
+    # pos171: [2.9670606]  # 170 degrees in radians
+    # pos172: [2.9845139]  # 171 degrees in radians
+    # pos173: [3.0019672]  # 172 degrees in radians
+    # pos174: [3.0194205]  # 173 degrees in radians
+    # pos175: [3.0368738]  # 174 degrees in radians
+    # pos176: [3.0543271]  # 175 degrees in radians
+    # pos177: [3.0717804]  # 176 degrees in radians
+    # pos178: [3.0892337]  # 177 degrees in radians
+    # pos179: [3.1066870]  # 178 degrees in radians
+    # pos180: [3.1241403]  # 179 degrees in radians
+    # pos181: [3.1415926]  # 180 degrees in radians
+
