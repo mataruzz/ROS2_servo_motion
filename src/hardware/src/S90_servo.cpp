@@ -234,7 +234,7 @@ hardware_interface::return_type S90ServoSystemPositionOnlyHardware::write(
             const auto delayOn = 15'000;
 
             double angleDeg = angleRad*180/(3.1415926);
-            double pwmOn = angleDeg*13 + 300;
+            double pwmOn = angleDeg*11.11 + 300;
             // Set the pin high for pwmOn 
             digitalWrite(GPIO_PIN, HIGH);
             usleep(pwmOn);
