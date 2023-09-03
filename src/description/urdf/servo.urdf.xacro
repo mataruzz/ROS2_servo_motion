@@ -88,11 +88,12 @@
       <material name="Red" />
     </collision>
   </link>
-  <joint name="support_to_rot_link" type="continuous">
+  <joint name="support_to_rot_link" type="revolute">
     <parent link="support_link" />
     <child link="rot_link" />
     <axis xyz="0 0 1"/>
     <origin xyz="0 0 ${rot_link_heigth}" rpy="0 0 0" />
+    <limit lower="0" upper="0" effort="1000" velocity="100"/>
   </joint>
 
 </xacro:macro>
