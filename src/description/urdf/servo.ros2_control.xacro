@@ -13,8 +13,8 @@
 
             <joint name="support_to_rot_link">
                 <command_interface name="position">
-                    <param name="min">-1</param>
-                    <param name="max">1</param>
+                    <param name="min">0</param>
+                    <param name="max">3.14</param>
                 </command_interface>
                 <state_interface name="position" />
             </joint>
