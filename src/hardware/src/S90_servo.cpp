@@ -10,9 +10,6 @@
 #include "hardware_interface/types/hardware_interface_type_values.hpp"
 #include "rclcpp/rclcpp.hpp"
 
-#include "wiringPi.h"
-#include <unistd.h>
-#include <cstdio>
 #define GPIO_PIN 5
 
 namespace hardware
@@ -187,10 +184,9 @@ hardware_interface::return_type S90ServoSystemPositionOnlyHardware::read(
 
     for (uint i = 0; i < hw_states_.size(); i++)
     {
-    //     // Simulate S90 servo's movement
+        // Simulate S90 servo's movement
         hw_states_[i] = hw_states_[i] + (hw_commands_[i] - hw_states_[i]) / hw_slowdown_;
 
-        // hw_states_[i] = hw_states_[i] + (hw_commands_[i] - hw_states_[i]);
     //     RCLCPP_INFO(
     //     rclcpp::get_logger("S90ServoSystemPositionOnlyHardware"), "Got state %.5f for joint %d!",
     //     hw_states_[i], i);
@@ -211,15 +207,6 @@ hardware_interface::return_type S90ServoSystemPositionOnlyHardware::write(
     // Set the pin as an output
     pinMode(GPIO_PIN, OUTPUT);
 
-    // TEST moving to 0
-    // digitalWrite(GPIO_PIN, HIGH);
-    // usleep(300);
-
-    // // Set the pin low for the remaining cycle
-    // digitalWrite(GPIO_PIN, LOW);
-    // usleep(20'000);
-    // END TEST
-
     for (uint i = 0; i < hw_commands_.size(); i++)
     {
     //     // Simulate sending commands to the hardware
@@ -230,19 +217,10 @@ hardware_interface::return_type S90ServoSystemPositionOnlyHardware::write(
     // RCLCPP_INFO(
     //     rclcpp::get_logger("S90ServoSystemPositionOnlyHardware"), "Joints successfully written!");
     // END: This part here is for exemplary purposes - Please do not copy to your production code
+            
             const double angleRad = hw_commands_[i];
-            const auto delayOn = 15'000;
-
-            double angleDeg = angleRad*180/(3.1415926);
-            double pwmOn = angleDeg*11.11 + 300;
-            // Set the pin high for pwmOn 
-            digitalWrite(GPIO_PIN, HIGH);
-            usleep(pwmOn);
-
-            // Set the pin low for the remaining cycle
-            digitalWrite(GPIO_PIN, LOW);
-            usleep(20.0*1000 - pwmOn);
-            // usleep(delayOn);
+            // const auto delayOn = 15'000;
+            servoPulse(GPIO_PIN, angleRad);
     }
 
     
