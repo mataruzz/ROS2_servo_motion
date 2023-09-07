@@ -13,7 +13,7 @@ For a better understanding and simple control (outside ROS) of the micro servo, 
 To <strong>enable</strong> the utilization of this repository, the micro-servo S90's PWM wire <strong>must be connected</strong> to <strong>PIN 5</strong> (GPIO's pin enumeration, corresponding to physical PIN 29).
 
 <p align="center">
-  <img width = "1000" src="https://github.com/mataruzz/ROS2_servo_motion/tree/humble/src/description/images/gpio_pinout.png">
+  <img width = "450" src="https://github.com/mataruzz/ROS2_servo_motion/blob/humble/src/description/images/gpio_pinout.png">
 </p>
 
 ### Used System
