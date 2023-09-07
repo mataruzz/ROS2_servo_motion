@@ -5,7 +5,7 @@
   <version>0.0.0</version>
   <description>Hardware interface for the micro-servo S90</description>
   <maintainer email="matarozzo.alvin@gmail.com">Alvin Matarozzo</maintainer>
-  <!-- <license>TODO: License declaration</license> -->
+  <license>TODO: License declaration</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
  
