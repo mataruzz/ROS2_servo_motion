@@ -51,14 +51,7 @@ install(
   DIRECTORY include/
   DESTINATION include/hardware
 )
-# install(
-#   DIRECTORY description/launch description/urdf #description/ros2_control description/rviz
-#   DESTINATION share/hardware
-# )
-# install(
-#   DIRECTORY bringup/launch bringup/config
-#   DESTINATION share/hardware
-# )
+
 install(TARGETS hardware
   EXPORT export_hardware
   ARCHIVE DESTINATION lib

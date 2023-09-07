@@ -15,7 +15,7 @@ def generate_launch_description():
         DeclareLaunchArgument(
             "use_rviz",
             default_value="false",
-            description="Start Rviz2 automatically with this launch file",
+            description="Does not start Rviz2 automatically with this launch file", # it's supposed to be launched inside raspberryPi
         )
     )
     
@@ -89,7 +89,7 @@ def generate_launch_description():
     )
 
     # Delay rviz start after `joint_state_broadcaster`
-    delay_rviz_after_joint_state_broadcaster_spawner = RegisterEventHandler(
+    delayed_rviz = RegisterEventHandler(
         event_handler=OnProcessExit(
             target_action=joint_state_broadcaster_spawner,
             on_exit=[rviz_node],
@@ -97,7 +97,7 @@ def generate_launch_description():
     )
     
     # Delay start of robot_controller after `joint_state_broadcaster`
-    delay_robot_controller_spawner_after_joint_state_broadcaster_spawner = RegisterEventHandler(
+    delayed_robot_controller_spawner = RegisterEventHandler(
         event_handler=OnProcessExit(
             target_action=joint_state_broadcaster_spawner,
             on_exit=[robot_controller_spawner],
@@ -108,8 +108,8 @@ def generate_launch_description():
         control_node,
         robot_state_pub_node,
         joint_state_broadcaster_spawner,
-        delay_rviz_after_joint_state_broadcaster_spawner,
-        delay_robot_controller_spawner_after_joint_state_broadcaster_spawner,
+        delayed_rviz,
+        delayed_robot_controller_spawner,
     ]
 
     return LaunchDescription(declared_arguments + nodes)

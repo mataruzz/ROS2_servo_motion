@@ -23,11 +23,11 @@ hardware_interface::CallbackReturn S90ServoSystemPositionOnlyHardware::on_init(
     {
         return hardware_interface::CallbackReturn::ERROR;
     }
-    // BEGIN: This part here is for exemplary purposes - Please do not copy to your production code
-    hw_start_sec_ = stod(info_.hardware_parameters["example_param_hw_start_duration_sec"]);
-    hw_stop_sec_ = stod(info_.hardware_parameters["example_param_hw_stop_duration_sec"]);
-    hw_slowdown_ = stod(info_.hardware_parameters["example_param_hw_slowdown"]);
-    // END: This part here is for exemplary purposes - Please do not copy to your production code
+    // Parameters declaration 
+    hw_start_sec_ = stod(info_.hardware_parameters["hw_start_duration_sec_param"]);
+    hw_stop_sec_ = stod(info_.hardware_parameters["hw_stop_duration_sec_param"]);
+    hw_slowdown_ = stod(info_.hardware_parameters["hw_slowdown_param"]);
+    
     hw_states_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
     hw_commands_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
     
@@ -77,7 +77,6 @@ hardware_interface::CallbackReturn S90ServoSystemPositionOnlyHardware::on_init(
 hardware_interface::CallbackReturn S90ServoSystemPositionOnlyHardware::on_configure(
     const rclcpp_lifecycle::State & /*previous_state*/)
 {
-    // BEGIN: This part here is for exemplary purposes - Please do not copy to your production code
     RCLCPP_INFO(
         rclcpp::get_logger("S90ServoSystemPositionOnlyHardware"), "Configuring ...please wait...");
 
@@ -88,9 +87,8 @@ hardware_interface::CallbackReturn S90ServoSystemPositionOnlyHardware::on_config
         rclcpp::get_logger("S90ServoSystemPositionOnlyHardware"), "%.1f seconds left...",
         hw_start_sec_ - i);
     }
-    // END: This part here is for exemplary purposes - Please do not copy to your production code
     
-    // reset values always when configuring hardware
+    // reset values always when configuring hardware since no encoder is present
     for (uint i = 0; i < hw_states_.size(); i++)
     {
         hw_states_[i] = 0;
@@ -131,7 +129,6 @@ S90ServoSystemPositionOnlyHardware::export_command_interfaces()
 hardware_interface::CallbackReturn S90ServoSystemPositionOnlyHardware::on_activate(
   const rclcpp_lifecycle::State & /*previous_state*/)
 {
-    // BEGIN: This part here is for exemplary purposes - Please do not copy to your production code
     RCLCPP_INFO(
         rclcpp::get_logger("S90ServoSystemPositionOnlyHardware"), "Activating ...please wait...");
 
@@ -142,7 +139,6 @@ hardware_interface::CallbackReturn S90ServoSystemPositionOnlyHardware::on_activa
         rclcpp::get_logger("S90ServoSystemPositionOnlyHardware"), "%.1f seconds left...",
         hw_start_sec_ - i);
     }
-    // END: This part here is for exemplary purposes - Please do not copy to your production code
 
     // command and state should be equal when starting
     for (uint i = 0; i < hw_states_.size(); i++)
@@ -158,7 +154,6 @@ hardware_interface::CallbackReturn S90ServoSystemPositionOnlyHardware::on_activa
 hardware_interface::CallbackReturn S90ServoSystemPositionOnlyHardware::on_deactivate(
   const rclcpp_lifecycle::State & /*previous_state*/)
 {
-    // BEGIN: This part here is for exemplary purposes - Please do not copy to your production code
     RCLCPP_INFO(
         rclcpp::get_logger("S90ServoSystemPositionOnlyHardware"), "Deactivating ...please wait...");
 
@@ -171,7 +166,6 @@ hardware_interface::CallbackReturn S90ServoSystemPositionOnlyHardware::on_deacti
     }
 
     RCLCPP_INFO(rclcpp::get_logger("S90ServoSystemPositionOnlyHardware"), "Successfully deactivated!");
-    // END: This part here is for exemplary purposes - Please do not copy to your production code
 
     return hardware_interface::CallbackReturn::SUCCESS;
 }
@@ -179,20 +173,13 @@ hardware_interface::CallbackReturn S90ServoSystemPositionOnlyHardware::on_deacti
 hardware_interface::return_type S90ServoSystemPositionOnlyHardware::read(
   const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
 {
-    // BEGIN: This part here is for exemplary purposes - Please do not copy to your production code
-    // RCLCPP_INFO(rclcpp::get_logger("S90ServoSystemPositionOnlyHardware"), "Reading...");
-
+    // Read the command and keep it known 
     for (uint i = 0; i < hw_states_.size(); i++)
     {
         // Simulate S90 servo's movement
         hw_states_[i] = hw_states_[i] + (hw_commands_[i] - hw_states_[i]) / hw_slowdown_;
 
-    //     RCLCPP_INFO(
-    //     rclcpp::get_logger("S90ServoSystemPositionOnlyHardware"), "Got state %.5f for joint %d!",
-    //     hw_states_[i], i);
     }
-    // RCLCPP_INFO(rclcpp::get_logger("S90ServoSystemPositionOnlyHardware"), "Joints successfully read!");
-    // END: This part here is for exemplary purposes - Please do not copy to your production code
 
     return hardware_interface::return_type::OK;
 }
@@ -200,30 +187,17 @@ hardware_interface::return_type S90ServoSystemPositionOnlyHardware::read(
 hardware_interface::return_type S90ServoSystemPositionOnlyHardware::write(
   const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
 {
-    // BEGIN: This part here is for exemplary purposes - Please do not copy to your production code
-    // RCLCPP_INFO(rclcpp::get_logger("S90ServoSystemPositionOnlyHardware"), "Writing...");
-    
+    // Initialization of C++ rasp.Pi library and it's pin's declaration 
     wiringPiSetupGpio();
-    // Set the pin as an output
+
     pinMode(GPIO_PIN, OUTPUT);
 
     for (uint i = 0; i < hw_commands_.size(); i++)
-    {
-    //     // Simulate sending commands to the hardware
-    //     RCLCPP_INFO(
-    //     rclcpp::get_logger("S90ServoSystemPositionOnlyHardware"), "Got command %.5f for joint %d!",
-    //     hw_commands_[i], i);
-    // }
-    // RCLCPP_INFO(
-    //     rclcpp::get_logger("S90ServoSystemPositionOnlyHardware"), "Joints successfully written!");
-    // END: This part here is for exemplary purposes - Please do not copy to your production code
-            
+    {            
             const double angleRad = hw_commands_[i];
-            // const auto delayOn = 15'000;
             servoPulse(GPIO_PIN, angleRad);
     }
 
-    
     return hardware_interface::return_type::OK;
 }
 

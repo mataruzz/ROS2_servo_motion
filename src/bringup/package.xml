@@ -3,9 +3,9 @@
 <package format="3">
   <name>bringup</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
-  <maintainer email="matarozzo.alvin@gmail.com">mataruzz</maintainer>
-  <license>TODO: License declaration</license>
+  <description>Definition of all the needed information necessary for the hardware and hardware_interface</description>
+  <maintainer email="matarozzo.alvin@gmail.com">Alvin Matarozzo</maintainer>
+  <!-- <license>TODO: License declaration</license> -->
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
