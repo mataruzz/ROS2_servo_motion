@@ -11,7 +11,10 @@ The <em>primary objective</em> of this repository is to develop and incorporate 
 For a better understanding and simple control (outside ROS) of the micro servo, see my other github project [S90_servo_motor](https://github.com/mataruzz/raspberryPi_components_tests/tree/main/S90_servo_motor), or looks at other [examples](https://www.circuitbasics.com/how-to-use-servos-on-the-raspberry-pi/).
 
 
-## TO DO: describe hardware_interface implementation
+## Implementation
+To controll the servo position it has been used the "ros2_controll" framework, specifically implementing the ***forward position controller***.
+
+In addition, it has been integrated the **WiringPi** library for communication with the servo on the RaspberryPi
 
 
 ## Configuration and Setup
@@ -85,8 +88,8 @@ In addition, the movement will be also simulated in the RViz environment, as sho
   <img width = "350" src="./doc/gifs/h_i_example.gif">
 </p>
 
-## **Pros** and **Cons** of the project
-In this section, I'll try to highlight pros and cons of this hardware-interface, with the aim to make clear the whole project:
+## **Pros** and **Cons**
+ To provide a clear and structured assessment, you can find pros and cons in the following table:
 
 <p align="center">
 
@@ -99,5 +102,14 @@ In this section, I'll try to highlight pros and cons of this hardware-interface,
 
 </p>
 
-## Future development:
+<br />
+<br />
 
+## Future developement:
+Looking to the future of this project, I would like to pursue several goals.
+
+First, I want to enhance the functionality of the system by adding other servos and building a simple 2 degrees of freedom (2DOF) structure. This will provide me the ability to control a possible camera's movements in both the horizontal (right and left) and vertical (up and down) axes, which may be helpful for analyze the surrounding environment.
+
+Additionally, I would like to explore other control methods, such as velocity control and, if practical, closed-loop control. Implementing these control approaches requires access to the necessary sensor data, such as potentiometer values, speed and time measurements. 
+
+Furthermore, I recognize the need to address system jitter, which can affect camera stability.
