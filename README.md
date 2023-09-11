@@ -4,7 +4,7 @@
 </p>
 The micro-servo S90 is a small, lightweight motorized device commonly used with Raspberry Pi or Arduino boards to control the precise movement of mechanical parts. It is compact, low-cost, and ideal for applications such as robotics, automation, and remote-controlled systems.
 
-The <em>primary objective</em> of this repository is to develop and incorporate the hardware interface, enabling the utilization within the ROS (Robot Operating System) framework.
+The <em>primary objective</em> of this repository is to develop and incorporate the hardware interface, enabling the utilization within the ROS2 (Robot Operating System) framework.
 
 &NewLine;
 
@@ -12,9 +12,9 @@ For a better understanding and simple control (outside ROS) of the micro servo, 
 
 
 ## Implementation
-To controll the servo position it has been used the "ros2_controll" framework, specifically implementing the ***forward position controller***.
+To control the servo position it has used the "ros2_control" framework, specifically implementing the ***forward position controller*** hardware interface.
 
-In addition, it has been integrated the **WiringPi** library for communication with the servo on the RaspberryPi
+In addition, it has been integrated the **WiringPi** library for communicate with the servo on the RaspberryPi.
 
 
 ## Configuration and Setup
@@ -44,7 +44,7 @@ cd ~/ROS2_servo_motion
 colcon build --parallel-workers 2 --executor sequential
 ```
 ### Run the example
-In the following example, 5 positions are defined and iteratevely passed to the controller.
+In the following example, 5 positions are defined and iteratively passed to the controller.
 
 ***Inside the RaspberryPi***:
 
@@ -66,7 +66,7 @@ Another way to send to the controller the target position is to write directly o
 ros2 topic pub /forward_position_controller/commands std_msgs/msg/Float64MultiArray "data:
 - 3.14"
 ```
-The above example script nothing do more than sending to the controller the desired position every second.
+The above example script nothing does more than sending to the controller the desired position every second.
 
 ***On your PC:*** 
 * Open Rviz:
@@ -95,9 +95,9 @@ In addition, the movement will be also simulated in the RViz environment, as sho
 
 |    <p align="center"> **Pros**   </p>    |           <p align="center"> **Cons**   </p>               |
 |:-------------|---------------------------|
-| **Hardware Integration:** The capacity to effectively communicate with physical devices is demonstrated through the construction of a hardware interface for the micro servo S90. |   **Scalability Concerns:** You can run into scalability problems that need to be handled if you integrate more hardware or devices into your project. <br/>  <br /> <br />|
-| **Raspberry Pi Compatibility:** As a control platform, the Raspberry Pi 3B+ offers a variety of advantages, including as price, a strong community and ecosystem, and usability. <br /> <br /> <br /> <br /> <br />| **Limited Control Precision:** It is difficult to achieve high precision when feedback mechanisms is missing. Due to the lack of a closed loop control system, the current configuration of the project is susceptible to disturbances and inaccuracies in servo positioning, which can restrict precision and robustness.|
-| **Open Source Framework (ROS2) compatibility:** Embracing ROS2 simplifies integration with hardware interfaces and opens a framework that is modular, reusable, and reliable. As part of the ROS2 community, you have access to a vast network of experts, collaborators, and enthusiasts. | **Lack of Trajectory Tracking:** The lack of trajectory control means that the servo cannot smoothly follow a predefined path or perform complex motions. This is often important in applications that require dynamic and precise behavior. <br /> <br /> <br /> |
+| **Hardware Integration:** The capacity to effectively communicate with physical devices is demonstrated through the construction of a hardware interface for the micro servo S90. |   **Scalability Concerns:** You can run into scalability problems that need to be handled if you integrate more hardware or devices into your project. <br/>  <br /> |
+| **Raspberry Pi Compatibility:** As a control platform, the Raspberry Pi 3B+ offers a variety of advantages, including as price, a strong community and ecosystem, and usability. <br /> <br /> <br /> | **Limited Control Precision:** It is difficult to achieve high precision when feedback mechanisms is missing. Due to the lack of a closed loop control system, the current configuration of the project is susceptible to disturbances and inaccuracies in servo positioning, which can restrict precision and robustness. |
+| **Open Source Framework (ROS2) compatibility:** Embracing ROS2 simplifies integration with hardware interfaces and opens a framework that is modular, reusable, and reliable. As part of the ROS2 community, you have access to a vast network of experts, collaborators, and enthusiasts. | **Lack of Trajectory Tracking:** The lack of trajectory control means that the servo cannot smoothly follow a predefined path or perform complex motions. This is often important in applications that require dynamic and precise behavior. <br /> <br /> |
 | **Position Control:** Achieving open-loop position control, even if simple and inaccurate, is an important part of advanced control technology and indicates progress toward project goals. |     **Presence of Jitter:** A notable drawback is the presence of jitter caused by using an inaccurate square wave for control (generated by the RaspberryPi 3B+). This can lead to unwanted fluctuations and instability.   |
 
 </p>
