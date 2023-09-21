@@ -24,7 +24,7 @@ add_library(
   hardware
   SHARED
   src/S90_servo.cpp
-  src/S90_GPIOs_functions.cpp
+  src/micro_servo.cpp
 )
 target_compile_features(hardware PUBLIC cxx_std_17)
 target_include_directories(hardware PUBLIC

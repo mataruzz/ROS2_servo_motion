@@ -1,6 +1,4 @@
 #include "../include/hardware/S90_servo.hpp"
-// #include "../include/hardware/S90_GPIOs_functions.hpp"
-#include "../include/hardware/micro_servo.hpp"
 
 #include <chrono>
 #include <cmath>
@@ -31,7 +29,12 @@ hardware_interface::CallbackReturn S90ServoSystemPositionOnlyHardware::on_init(
     
     hw_states_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
     hw_commands_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
-    
+
+    // Setting up RPi's pin definition
+    wiringPiSetupGpio();
+
+    servos.emplace_back(std::make_unique<microServo>(GPIO_PIN, bool(1))); //1:= OUTPUT, 0:= INPUT
+
     for (const hardware_interface::ComponentInfo & joint : info_.joints)
     {
         // S90ServoSystemPositionOnly has exactly one state and command interface on each joint
@@ -185,29 +188,15 @@ hardware_interface::return_type S90ServoSystemPositionOnlyHardware::read(
     return hardware_interface::return_type::OK;
 }
 
-std::vector<microServo> servos;
-servos.emplace_back(GPIO_PIN, 1);
 
 hardware_interface::return_type S90ServoSystemPositionOnlyHardware::write(
   const rclcpp::Time & /*time*/, const rclcpp::Duration & /*period*/)
 {
-    // Initialization of C++ rasp.Pi library and it's pin's declaration 
-    wiringPiSetupGpio();
-
-    /*Old style, without class definition*/
-    // pinMode(GPIO_PIN, OUTPUT);
-
-    // for (uint i = 0; i < hw_commands_.size(); i++)
-    // {            
-    //         const double angleRad = hw_commands_[i];
-    //         servoPulse(GPIO_PIN, angleRad);
-    // }
-
-    /*using the class micro_servo*/
+    /*Transforming rad to pwm using the class micro_servo*/
     for (uint i = 0; i < hw_commands_.size(); i++)
     {            
-            const double angleRad = hw_commands_[i];
-            servos[i].goToAngle(angleRad);
+            float angleRad = hw_commands_[i];
+            servos[i]->goToAngle(angleRad);
     }
 
     return hardware_interface::return_type::OK;

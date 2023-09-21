@@ -14,6 +14,8 @@
 #include "rclcpp_lifecycle/state.hpp"
 #include "visibility_control.hpp"
 
+#include "micro_servo.hpp"
+
 namespace hardware
 {
 class S90ServoSystemPositionOnlyHardware : public hardware_interface::SystemInterface
@@ -56,10 +58,12 @@ private:
   double hw_start_sec_;
   double hw_stop_sec_;
   double hw_slowdown_;
+  
 
   // Store the command for the simulated robot
   std::vector<double> hw_commands_;
   std::vector<double> hw_states_;
+  std::vector<std::unique_ptr<microServo>> servos;
 }; 
 } // namespace hardware
 
