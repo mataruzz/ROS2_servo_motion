@@ -1,51 +1,36 @@
-#include <string>
-#include <cstdlib>
-#include <iostream>
-#include <math.h>
 #include "../include/hardware/micro_servo.hpp"
 
-class microServo {
-    private:
-        int GPIO_PIN;
-        float pwmOnMs{0.0}; // ms on which the squarewave will stay up in ms
-        float PwmPeriodMs{20.0}; // Pwm period in ms
-        float DegAngle;
+// Implementation of private member functions
+float microServo::degToPWM(float& degAngle) {
+    return degAngle * 11.11 + 300;  // In [us]
+}
 
-        float degToPWM(float DegAngle){
-            return this->radTodeg(DegAngle)*11.11 + 300; 
-        }
+float microServo::radTodeg(float& radAngle) {
+    return radAngle * 180 / M_PI;
+}
 
-        float radTodeg(float radAngle){
-            return radAngle*180/M_PI;
-        }
+// Implementation of public member functions
+microServo::microServo(const int& gpio_pin, bool set_gpio) {
+    GPIO_PIN = gpio_pin;
 
-    public:
-        microServo(const int gpio_pin, bool set_gpio) { // OUTPUT = 1, INPUT = 0
-            GPIO_PIN = gpio_pin;
-        
-            if (set_gpio)
-            {
-                pinMode(gpio_pin, OUTPUT);
-            }else
-            {
-                pinMode(gpio_pin, INPUT);
-            }
-        
-        }
+    if (set_gpio) {
+        pinMode(GPIO_PIN, OUTPUT);
+    } else {
+        pinMode(GPIO_PIN, INPUT);
+    }
+}
 
-        void goToAngle(float RadAngle){
-            this->DegAngle = this->radTodeg(RadAngle);
-            this->pwmOnMs = this->DegToPWM(DegAngle);
+void microServo::goToAngle(float& RadAngle) {
+    degAngle = radTodeg(RadAngle);
+    pwmOnUs = degToPWM(degAngle);
 
-            digitalWrite(GPIO_PIN, HIGH);
-            usleep(pwmOnMs*1000); // in us
+    digitalWrite(GPIO_PIN, HIGH);
+    usleep(pwmOnUs);
 
-            digitalWrite(GPIO_PIN, LOW);
-            usleep(this->PwmPeriodMs*1000 - this->pwmOnMs);
-        }
+    digitalWrite(GPIO_PIN, LOW);
+    usleep((pwmPeriodMs*1000 - pwmOnUs));
+}
 
-        void continuousSpeed(){
-            // TO DO: use for loop with different low time to change speed of continuous motion
-            }
-
-};
+void microServo::continuousSpeed() {
+    // Implementation of continuousSpeed function
+}
