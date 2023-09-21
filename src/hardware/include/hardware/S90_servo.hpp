@@ -58,11 +58,13 @@ private:
   double hw_start_sec_;
   double hw_stop_sec_;
   double hw_slowdown_;
-  
 
   // Store the command for the simulated robot
   std::vector<double> hw_commands_;
   std::vector<double> hw_states_;
+  std::vector<int> GPIO_PINs;
+  std::vector<bool> pins_mode;
+
   std::vector<std::unique_ptr<microServo>> servos;
 }; 
 } // namespace hardware

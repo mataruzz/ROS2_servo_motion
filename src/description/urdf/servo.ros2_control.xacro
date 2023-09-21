@@ -9,6 +9,8 @@
                 <param name="hw_start_duration_sec_param">0</param>
                 <param name="hw_stop_duration_sec_param">3.0</param>
                 <param name="hw_slowdown_param">5</param>
+                <param name="pin1">5</param>
+                <param name="pin1_mode">1</param>  <!-- 1:=OUTPUT, 0:= INPUT  -->
             </hardware>
 
             <joint name="support_to_rot_link">

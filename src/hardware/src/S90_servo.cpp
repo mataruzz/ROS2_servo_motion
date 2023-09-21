@@ -9,7 +9,7 @@
 #include "hardware_interface/types/hardware_interface_type_values.hpp"
 #include "rclcpp/rclcpp.hpp"
 
-#define GPIO_PIN 5
+// #define GPIO_PIN 5
 
 namespace hardware
 {
@@ -22,18 +22,29 @@ hardware_interface::CallbackReturn S90ServoSystemPositionOnlyHardware::on_init(
     {
         return hardware_interface::CallbackReturn::ERROR;
     }
+    
+    // Setting up RPi's pin definition
+    wiringPiSetupGpio();
+
     // Parameters declaration 
     hw_start_sec_ = stod(info_.hardware_parameters["hw_start_duration_sec_param"]);
     hw_stop_sec_ = stod(info_.hardware_parameters["hw_stop_duration_sec_param"]);
     hw_slowdown_ = stod(info_.hardware_parameters["hw_slowdown_param"]);
+
+    for (uint i=0; i < info_.joints.size(); i++)
+    {
+        int num = i+1;
+        GPIO_PINs.push_back(stoi(info_.hardware_parameters["pin"+ std::to_string(num)]));
+        pins_mode.push_back((bool)stoi(info_.hardware_parameters["pin"+ std::to_string(num)+"_mode"]));
+        servos.emplace_back(std::make_unique<microServo>(GPIO_PINs[i], pins_mode[i]));
+    }
+    // GPIO_PIN = stoi(info_.hardware_parameters["pin"]);
+    // pin_mode = (bool)stoi(info_.hardware_parameters["pin_mode"]);
     
     hw_states_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
     hw_commands_.resize(info_.joints.size(), std::numeric_limits<double>::quiet_NaN());
 
-    // Setting up RPi's pin definition
-    wiringPiSetupGpio();
-
-    servos.emplace_back(std::make_unique<microServo>(GPIO_PIN, bool(1))); //1:= OUTPUT, 0:= INPUT
+     //1:= OUTPUT, 0:= INPUT
 
     for (const hardware_interface::ComponentInfo & joint : info_.joints)
     {
