@@ -107,7 +107,7 @@ hardware_interface::CallbackReturn S90ServoSystemPositionOnlyHardware::on_config
     for (uint i = 0; i < hw_states_.size(); i++)
     {
         hw_states_[i] = 1.5707; //0; -> set to 90°
-        hw_commands_[i] = 1.5707 // 0; -> set to 90°
+        hw_commands_[i] = 1.5707; // 0; -> set to 90°
     }
 
     RCLCPP_INFO(rclcpp::get_logger("S90ServoSystemPositionOnlyHardware"), "Successfully configured!");
