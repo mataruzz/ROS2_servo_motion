@@ -106,8 +106,8 @@ hardware_interface::CallbackReturn S90ServoSystemPositionOnlyHardware::on_config
     // reset values always when configuring hardware since no encoder is present
     for (uint i = 0; i < hw_states_.size(); i++)
     {
-        hw_states_[i] = 0;
-        hw_commands_[i] = 0;
+        hw_states_[i] = 1.5707; //0; -> set to 90°
+        hw_commands_[i] = 1.5707 // 0; -> set to 90°
     }
 
     RCLCPP_INFO(rclcpp::get_logger("S90ServoSystemPositionOnlyHardware"), "Successfully configured!");
