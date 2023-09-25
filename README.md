@@ -33,7 +33,7 @@ This repository has been designed for use with the following hardware and softwa
 ### Installation 
 Once the hardware connection is ensured, access to the Raspberry (e.g., SSH) and:
 
-* Clone the wiringPi repository, since the installation from apt may be not work, and build it:
+* Clone the wiringPi repository, since the installation from apt may not work, and build it:
 ```
 cd ~/
 git clone https://github.com/WiringPi/WiringPi.git
