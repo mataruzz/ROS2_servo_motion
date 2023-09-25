@@ -33,10 +33,21 @@ This repository has been designed for use with the following hardware and softwa
 ### Installation 
 Once the hardware connection is ensured, access to the Raspberry (e.g., SSH) and:
 
-* Clone the repository both on your PC (to visualize the simulation) and Raspberry (to send actual signals):
+* Clone the wiringPi repository, since the installation from apt may be not work, and build it:
 ```
 cd ~/
-git clone https://github.com/mataruzz/ROS2_servo_motion
+git clone https://github.com/WiringPi/WiringPi.git
+cd ~/WiringPi && ./build
+```
+
+* Clone the servo repository both on your PC (to visualize the simulation) and Raspberry (to send actual signals):
+```
+cd ~/
+git clone https://github.com/mataruzz/ROS2_servo_motion 
+```
+and install all the dependent libraries:
+```
+rosdep install --from-paths src --ignore-src -r -y
 ```
 * Build the repository (limitating the number of threads) on the Raspberry:
 ```
