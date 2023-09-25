@@ -15,6 +15,7 @@ set(THIS_PACKAGE_INCLUDE_DEPENDS
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+
 foreach(Dependency IN ITEMS ${THIS_PACKAGE_INCLUDE_DEPENDS})
   find_package(${Dependency} REQUIRED)
 endforeach()
@@ -32,7 +33,7 @@ $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/hardware/include>
 $<INSTALL_INTERFACE:include/hardware>
 )
 
-target_link_libraries(hardware PUBLIC wiringPi)
+target_link_libraries(hardware PUBLIC -lwiringPi)
 
 ament_target_dependencies(
   hardware PUBLIC

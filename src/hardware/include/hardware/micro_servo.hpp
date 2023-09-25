@@ -1,7 +1,7 @@
 #ifndef MICRO_SERVO_HPP
 #define MICRO_SERVO_HPP
 
-#include "wiringPi.h"
+#include <wiringPi.h>
 #include <unistd.h>
 #include <cstdio>
 #include <math.h>
