@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(hardware)
+project(micro_servo_hardware)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -22,21 +22,21 @@ endforeach()
 
 ## COMPILE
 add_library(
-  hardware
+  micro_servo_hardware
   SHARED
   src/S90_servo.cpp
   src/micro_servo.cpp
 )
-target_compile_features(hardware PUBLIC cxx_std_17)
-target_include_directories(hardware PUBLIC
-$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/hardware/include>
-$<INSTALL_INTERFACE:include/hardware>
+target_compile_features(micro_servo_hardware PUBLIC cxx_std_17)
+target_include_directories(micro_servo_hardware PUBLIC
+$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/micro_servo_hardware/include>
+$<INSTALL_INTERFACE:include/micro_servo_hardware>
 )
 
-target_link_libraries(hardware PUBLIC -lwiringPi)
+target_link_libraries(micro_servo_hardware PUBLIC -lwiringPi)
 
 ament_target_dependencies(
-  hardware PUBLIC
+  micro_servo_hardware PUBLIC
   ${THIS_PACKAGE_INCLUDE_DEPENDS}
 )
 
@@ -45,15 +45,15 @@ ament_target_dependencies(
 target_compile_definitions(${PROJECT_NAME} PRIVATE "HARDWARE_BUILDING_DLL")
 
 # Export hardware plugins
-pluginlib_export_plugin_description_file(hardware_interface hardware.xml)
+pluginlib_export_plugin_description_file(hardware_interface micro_servo_hardware.xml)
 
 # INSTALL
 install(
   DIRECTORY include/
-  DESTINATION include/hardware
+  DESTINATION include/micro_servo_hardware
 )
 
-install(TARGETS hardware
+install(TARGETS micro_servo_hardware
   EXPORT export_hardware
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib

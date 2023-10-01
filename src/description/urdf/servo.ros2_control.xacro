@@ -5,7 +5,7 @@
 
         <ros2_control name="${name}" type="system">
             <hardware>
-                <plugin>hardware/S90ServoSystemPositionOnlyHardware</plugin>
+                <plugin>micro_servo_hardware/S90ServoSystemPositionOnlyHardware</plugin>
                 <param name="hw_start_duration_sec_param">0</param>
                 <param name="hw_stop_duration_sec_param">3.0</param>
                 <param name="hw_slowdown_param">5</param>

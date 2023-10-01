@@ -1,4 +1,4 @@
-#include "../include/hardware/micro_servo.hpp"
+#include "../include/micro_servo_hardware/micro_servo.hpp"
 
 // Implementation of private member functions
 float microServo::degToPWM(float& degAngle) {

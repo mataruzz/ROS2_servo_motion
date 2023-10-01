@@ -1,4 +1,4 @@
-#include "../include/hardware/S90_servo.hpp"
+#include "../include/micro_servo_hardware/S90_servo.hpp"
 
 #include <chrono>
 #include <cmath>
@@ -11,7 +11,7 @@
 
 // #define GPIO_PIN 5
 
-namespace hardware
+namespace micro_servo_hardware
 {
 hardware_interface::CallbackReturn S90ServoSystemPositionOnlyHardware::on_init(
   const hardware_interface::HardwareInfo & info)
@@ -213,9 +213,9 @@ hardware_interface::return_type S90ServoSystemPositionOnlyHardware::write(
     return hardware_interface::return_type::OK;
 }
 
-}  // namespace hardware
+}  // namespace micro_servo_hardware
 
 #include "pluginlib/class_list_macros.hpp"
 
 PLUGINLIB_EXPORT_CLASS(
-  hardware::S90ServoSystemPositionOnlyHardware, hardware_interface::SystemInterface)
+  micro_servo_hardware::S90ServoSystemPositionOnlyHardware, hardware_interface::SystemInterface)

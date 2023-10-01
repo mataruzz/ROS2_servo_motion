@@ -1,5 +1,5 @@
-#ifndef HARDWARE__S90_SERVO_HPP_
-#define HARDWARE__S90_SERVO_HPP_
+#ifndef MICRO_SERVO_HARDWARE__S90_SERVO_HPP_
+#define MICRO_SERVO_HARDWARE__S90_SERVO_HPP_
 
 #include <memory>
 #include <string>
@@ -16,40 +16,40 @@
 
 #include "micro_servo.hpp"
 
-namespace hardware
+namespace micro_servo_hardware
 {
 class S90ServoSystemPositionOnlyHardware : public hardware_interface::SystemInterface
 {
 public:
     RCLCPP_SHARED_PTR_DEFINITIONS(S90ServoSystemPositionOnlyHardware)
 
-    HARDWARE_PUBLIC
+    MICRO_SERVO_HARDWARE_PUBLIC
     hardware_interface::CallbackReturn on_init(
         const hardware_interface::HardwareInfo & info) override;
     
-    HARDWARE_PUBLIC
+    MICRO_SERVO_HARDWARE_PUBLIC
     hardware_interface::CallbackReturn on_configure(
         const rclcpp_lifecycle::State & previous_state) override;
 
-    HARDWARE_PUBLIC
+    MICRO_SERVO_HARDWARE_PUBLIC
     std::vector<hardware_interface::StateInterface> export_state_interfaces() override;
 
-    HARDWARE_PUBLIC
+    MICRO_SERVO_HARDWARE_PUBLIC
     std::vector<hardware_interface::CommandInterface> export_command_interfaces() override;
 
-    HARDWARE_PUBLIC
+    MICRO_SERVO_HARDWARE_PUBLIC
     hardware_interface::CallbackReturn on_activate(
         const rclcpp_lifecycle::State & previous_state) override;
     
-    HARDWARE_PUBLIC
+    MICRO_SERVO_HARDWARE_PUBLIC
       hardware_interface::CallbackReturn on_deactivate(
     const rclcpp_lifecycle::State & previous_state) override;
 
-    HARDWARE_PUBLIC
+    MICRO_SERVO_HARDWARE_PUBLIC
     hardware_interface::return_type read(
         const rclcpp::Time & time, const rclcpp::Duration & period) override;
     
-    HARDWARE_PUBLIC
+    MICRO_SERVO_HARDWARE_PUBLIC
     hardware_interface::return_type write(
         const rclcpp::Time & time, const rclcpp::Duration & period) override;
 
@@ -67,8 +67,8 @@ private:
 
   std::vector<std::unique_ptr<microServo>> servos;
 }; 
-} // namespace hardware
+} // namespace micro_servo_hardware
 
 
 
-#endif // HARDWARE__S90_SERVO_HPP_
+#endif // MICRO_SERVO_HARDWARE__S90_SERVO_HPP_
