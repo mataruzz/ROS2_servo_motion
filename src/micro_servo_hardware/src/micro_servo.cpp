@@ -10,14 +10,10 @@ float microServo::radTodeg(float& radAngle) {
 }
 
 // Implementation of public member functions
-microServo::microServo(const int& gpio_pin, bool set_gpio) {
+microServo::microServo(const int& gpio_pin) {
     GPIO_PIN = gpio_pin;
-
-    if (set_gpio) {
-        pinMode(GPIO_PIN, OUTPUT);
-    } else {
-        pinMode(GPIO_PIN, INPUT);
-    }
+    // Setting as default pin as OUTPUT due to S90 working principle
+    pinMode(GPIO_PIN, OUTPUT);
 }
 
 void microServo::goToAngle(float& RadAngle) {

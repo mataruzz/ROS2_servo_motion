@@ -35,8 +35,7 @@ hardware_interface::CallbackReturn S90ServoSystemPositionOnlyHardware::on_init(
     {
         int num = i+1;
         GPIO_PINs.push_back(stoi(info_.hardware_parameters["pin"+ std::to_string(num)]));
-        pins_mode.push_back((bool)stoi(info_.hardware_parameters["pin"+ std::to_string(num)+"_mode"]));
-        servos.emplace_back(std::make_unique<microServo>(GPIO_PINs[i], pins_mode[i]));
+        servos.emplace_back(std::make_unique<microServo>(GPIO_PINs[i]));
     }
     // GPIO_PIN = stoi(info_.hardware_parameters["pin"]);
     // pin_mode = (bool)stoi(info_.hardware_parameters["pin_mode"]);

@@ -19,7 +19,7 @@ class microServo {
         float radTodeg(float &radAngle);
 
     public:
-        microServo(const int &gpio_pin, bool set_gpio);
+        microServo(const int &gpio_pin);
 
         void goToAngle(float &RadAngle);
 
