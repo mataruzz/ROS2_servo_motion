@@ -66,11 +66,11 @@ source install/setup.bash
 ```
 * Run the controllers:
 ```
-ros2 launch bringup S90_servo.launch.py
+ros2 launch ros2_servo_motion S90_servo.launch.py
 ```
 * Run the example:
 ```
-ros2 launch bringup test_fordware_position_controller.launch.py
+ros2 launch ros2_servo_motion test_fordware_position_controller.launch.py
 ```
 Another way to send to the controller the target position is to write directly on the controller topic:
 ```
