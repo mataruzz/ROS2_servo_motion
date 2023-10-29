@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(micro_servo_hardware)
+project(ros2_servo_motion)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -22,21 +22,21 @@ endforeach()
 
 ## COMPILE
 add_library(
-  micro_servo_hardware
+  ros2_servo_motion
   SHARED
-  src/S90_servo.cpp
-  src/micro_servo.cpp
+  micro_servo_hardware/src/S90_servo.cpp
+  micro_servo_hardware/src/micro_servo.cpp
 )
-target_compile_features(micro_servo_hardware PUBLIC cxx_std_17)
-target_include_directories(micro_servo_hardware PUBLIC
+target_compile_features(ros2_servo_motion PUBLIC cxx_std_17)
+target_include_directories(ros2_servo_motion PUBLIC
 $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/micro_servo_hardware/include>
-$<INSTALL_INTERFACE:include/micro_servo_hardware>
+$<INSTALL_INTERFACE:include/ros2_servo_motion>
 )
 
-target_link_libraries(micro_servo_hardware PUBLIC -lwiringPi)
+target_link_libraries(ros2_servo_motion PUBLIC -lwiringPi)
 
 ament_target_dependencies(
-  micro_servo_hardware PUBLIC
+  ros2_servo_motion PUBLIC
   ${THIS_PACKAGE_INCLUDE_DEPENDS}
 )
 
@@ -45,32 +45,31 @@ ament_target_dependencies(
 target_compile_definitions(${PROJECT_NAME} PRIVATE "HARDWARE_BUILDING_DLL")
 
 # Export hardware plugins
-pluginlib_export_plugin_description_file(hardware_interface micro_servo_hardware.xml)
+pluginlib_export_plugin_description_file(hardware_interface ros2_servo_motion.xml)
+
 
 # INSTALL
 install(
-  DIRECTORY include/
-  DESTINATION include/micro_servo_hardware
+  DIRECTORY micro_servo_hardware/include/
+  DESTINATION include/${PROJECT_NAME}
 )
 
-install(TARGETS micro_servo_hardware
+install(
+  DIRECTORY     description/launch      description/config      description/urdf
+  DESTINATION share/${PROJECT_NAME}
+)
+
+install(
+  DIRECTORY     bringup/launch      bringup/config
+  DESTINATION share/${PROJECT_NAME}
+)
+
+install(TARGETS ros2_servo_motion
   EXPORT export_hardware
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin
 )
-
-if(BUILD_TESTING)
-  find_package(ament_lint_auto REQUIRED)
-  # the following line skips the linter which checks for copyrights
-  # comment the line when a copyright and license is added to all source files
-  set(ament_cmake_copyright_FOUND TRUE)
-  # the following line skips cpplint (only works in a git repo)
-  # comment the line when this package is in a git repo and when
-  # a copyright and license is added to all source files
-  set(ament_cmake_cpplint_FOUND TRUE)
-  ament_lint_auto_find_test_dependencies()
-endif()
 
 ## EXPORTS
 ament_export_targets(export_hardware HAS_LIBRARY_TARGET)

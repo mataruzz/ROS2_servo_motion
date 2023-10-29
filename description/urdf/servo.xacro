@@ -5,10 +5,10 @@
   <xacro:arg name="prefix" default="" />
 
   <!-- Import micro_servo S90 macro -->
-  <xacro:include filename="$(find description)/urdf/servo.urdf.xacro" />
+  <xacro:include filename="$(find ros2_servo_motion)/urdf/servo.urdf.xacro" />
 
   <!-- Import RRBot ros2_control description -->
-  <xacro:include filename="$(find description)/urdf/servo.ros2_control.xacro" />
+  <xacro:include filename="$(find ros2_servo_motion)/urdf/servo.ros2_control.xacro" />
 
   <!-- Used for fixing robot -->
   <link name="world"/>

@@ -16,7 +16,7 @@
 
 #include "micro_servo.hpp"
 
-namespace micro_servo_hardware
+namespace ros2_servo_motion
 {
 class S90ServoSystemPositionOnlyHardware : public hardware_interface::SystemInterface
 {
@@ -66,7 +66,7 @@ private:
 
   std::vector<std::unique_ptr<microServo>> servos;
 }; 
-} // namespace micro_servo_hardware
+} // namespace ros2_servo_motion
 
 
 

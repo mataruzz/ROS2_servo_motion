@@ -1,6 +1,6 @@
-<library path="micro_servo_hardware">
-    <class name="micro_servo_hardware/S90ServoSystemPositionOnlyHardware"
-           type="micro_servo_hardware::S90ServoSystemPositionOnlyHardware"
+<library path="ros2_servo_motion">
+    <class name="ros2_servo_motion/S90ServoSystemPositionOnlyHardware"
+           type="ros2_servo_motion::S90ServoSystemPositionOnlyHardware"
            base_class_type="hardware_interface::SystemInterface">
       <description>
         The ros2_control S90_servo example using a system hardware interface-type.

@@ -21,6 +21,7 @@ def generate_launch_description():
     
     # Initialize Arguments
     use_rviz = LaunchConfiguration("use_rviz")
+    pkg_name = "ros2_servo_motion"
     
     # Get URDF via xacro
     robot_description_content = Command(
@@ -29,7 +30,7 @@ def generate_launch_description():
             " ",
             PathJoinSubstitution(
                 [
-                    FindPackageShare("description"),
+                    FindPackageShare(pkg_name),
                     "urdf",
                     "servo.xacro",
                 ]
@@ -40,14 +41,14 @@ def generate_launch_description():
     
     robot_controllers = PathJoinSubstitution(
         [
-            FindPackageShare("bringup"),
+            FindPackageShare(pkg_name),
             "config",
             "S90_servo_controllers.yaml"
         ]
     )
 
     rviz_config_file = PathJoinSubstitution(
-        [FindPackageShare("description"),
+        [FindPackageShare(pkg_name),
          "config",
          "config.rviz"
         ]

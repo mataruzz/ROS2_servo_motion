@@ -22,7 +22,7 @@ def generate_launch_description():
 
     position_goals = PathJoinSubstitution(
         [
-            FindPackageShare("bringup"),
+            FindPackageShare("ros2_servo_motion"),
             "config",
             "S90_servo_forward_position_publisher.yaml",
         ]

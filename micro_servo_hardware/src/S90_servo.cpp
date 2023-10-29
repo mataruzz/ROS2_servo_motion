@@ -11,7 +11,7 @@
 
 // #define GPIO_PIN 5
 
-namespace micro_servo_hardware
+namespace ros2_servo_motion
 {
 hardware_interface::CallbackReturn S90ServoSystemPositionOnlyHardware::on_init(
   const hardware_interface::HardwareInfo & info)
@@ -212,9 +212,9 @@ hardware_interface::return_type S90ServoSystemPositionOnlyHardware::write(
     return hardware_interface::return_type::OK;
 }
 
-}  // namespace micro_servo_hardware
+}  // namespace ros2_servo_motion
 
 #include "pluginlib/class_list_macros.hpp"
 
 PLUGINLIB_EXPORT_CLASS(
-  micro_servo_hardware::S90ServoSystemPositionOnlyHardware, hardware_interface::SystemInterface)
+  ros2_servo_motion::S90ServoSystemPositionOnlyHardware, hardware_interface::SystemInterface)
